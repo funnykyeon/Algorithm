@@ -13,12 +13,14 @@ for _ in range(int(input())):
         if len(max_heap):
             # 빈배열이 아니라면
             print(heapq.heappop(max_heap)[1])
-        #     최소값을 출력후 삭제
+        #     힙에서 값을 읽어올 때는 각 튜플에서 인덱스 1에 있는 값을 취하면 됨
+        #     최대값을 출력후 삭제
         else:
             print(0)
     #       빈배열일때 0을 출력
     else:
         heapq.heappush(max_heap, [-x, x])
+#         최대값은(우선 순위, 값) 구조의 튜플(tuple)을 힙에 추가하거나 삭제하면 됨
 #         0이아닌 자연수를 받았을때 heappush
 
 
