@@ -1,28 +1,31 @@
-# 암호만들기
-from sys import stdin
-from itertools import combinations
+import sys
+import itertools
 
-mo_um = []
+input = sys.stdin.readline
 
-l, c = map(int, stdin.readline().split())
-alpha = list(stdin.readline().rstrip().split())
+l, c = map(int, input().split())
+# input 값을 사전식으로 정렬
+wordList = sorted(list(input().split()))
 
-for i in alpha:
-    if i in ("a", "e", "i", "o", "u"):
-        mo_um.append(i)
-#         alpha에서 모음 걸러주는
+# l개의 경우를 모두 뽑아주고 특정 조건(모음 1개이상, 자음 2개 이상)을 만족하는 값만 보여주면 된다.
+vowel = ["a", "e", "i", "o", "u"]
+consonant = list("bcdfghjklmnpqrstvwxyz")
 
+for i in wordList:
+    result = list(itertools.combinations(wordList, l))
+    # 가능한 조합수 전부
+print(l, c, wordList, vowel, consonant)
+print(result)
+answer = []
+for res in result:
+    v_count = 0
+    c_count = 0
+    for c in res:
+        if c in vowel:
+            v_count += 1
+        else:
+            c_count += 1
+    if v_count > 0 and c_count > 1:
+        answer.append(res)
 
-res = set()
-for i in list(set(combinations(alpha, l))):
-    length = l
-    for k in mo_um:
-        if k in i:
-            length -= 1
-    if length < 2 or length == l:
-        continue
-    else:
-        res.add(tuple(sorted(list(i))))
-
-for i in list(sorted(res)):
-    print(''.join(i))
+print("\n".join(["".join(s) for s in answer]), end="")
