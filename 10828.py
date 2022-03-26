@@ -58,7 +58,6 @@ def top():
 
 N = int(sys.stdin.readline().rstrip())
 stack = []
-
 for _ in range(N):
     input_split = sys.stdin.readline().rstrip().split()
 
