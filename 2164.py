@@ -11,3 +11,4 @@ while len(q)>1:
     q.append(q.popleft())
 
 print(q[0])
+#테스트
