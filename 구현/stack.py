@@ -17,8 +17,8 @@ class Stack:
 
         node = self.top
         self.top = self.top.next
-
         return node.item
 
     def is_empty(self):
         return self.top is None
+
