@@ -11,8 +11,8 @@ class LinkedList:
     def append(self, value):
         curr = self.head
         new_node = Node(value)
-        # [] [] [] [] [] [] --> new_node
-        #               curr --> new_node
+        # [] [] [] [] [] [] -->  new_node
+        #               curr -->  new_node
         while curr.next is not None:
             curr = curr.next
 
