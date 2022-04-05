@@ -1,26 +1,25 @@
 import sys
-
-# V: 마을 갯수, E: 도로 갯수
-V, E = map(int, sys.stdin.readline().split())
-
-INF = sys.maxsize
-arr = [[INF for _ in range(V)] for _ in range(V)]
+V, E = map(int, input().split())
+INF = 10000 * V + 1 #전체 사이클을 돌 경우 최댓값 +1
+distance = [[INF for _ in range(V+1)] for _ in range(V+1)]
 
 for _ in range(E):
-    i, j, c = map(int, sys.stdin.readline().split())
-    arr[i-1][j-1] = c
+    start, end, dist = map(int, sys.stdin.readline().split())
+    distance[start][end] = dist
 
-for k in range(V):  # 거쳐가는애
-    for i in range(V):  # from
-        for j in range(V):  # to
-            arr[i][j] = min(arr[i][j], arr[i][k] + arr[k][j])
+#플로이드 워셜 알고리즘
+for k in range(1, V+1):
+    for i in range(1, V+1):
+        for j in range(1, V+1):
+            distance[i][j] = min(distance[i][j],
+                                 distance[i][k] + distance[k][j])
 
-result = INF
-#  계속 갱신한 뒤 사이클은 본인부터 본인까지에 저장됨
-for i in range(V):
-    result = min(result, arr[i][i])
-
-if result == INF:
+#가장 작은 사이클 찾는 for문
+min_cycle = INF
+for i in range(1, V+1):
+    min_cycle = min(min_cycle, distance[i][i])
+    
+if min_cycle == 10000 * V + 1: #사이클이 없을 경우
     print(-1)
 else:
-    print(result)
+    print(min_cycle)
