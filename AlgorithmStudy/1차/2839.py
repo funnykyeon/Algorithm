@@ -9,3 +9,4 @@ while True:
     if N < 0:
         print(-1)
         break
+
